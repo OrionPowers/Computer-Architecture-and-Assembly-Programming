@@ -38,7 +38,12 @@ GameLoop:
     cmp balance, 0
     jle GameOver
     
-    ; Display menu
+    ; Display balance
+    call DisplayBalance
+    
+    ; Display separator and menu
+    mov edx, OFFSET separator
+    call WriteString
     mov edx, OFFSET menuMsg
     call WriteString
     call ReadInt
