@@ -205,7 +205,19 @@ CompareHands:
     cmp dealerTotal, 21
     jg PlayerWins
     
-    ; TODO: Compare totals
+    ; Compare totals
+    mov eax, playerTotal
+    cmp eax, dealerTotal
+    jg PlayerWins
+    jl PlayerLoses
+    
+    ; Push (tie)
+    mov edx, OFFSET pushMsg
+    call WriteString
+    ret
+    
+PlayerLoses:
+    ; TODO: Add lose logic
     ret
     
 PlayerWins:
@@ -355,13 +367,26 @@ CompareHands:
     cmp dealerTotal, 21
     jg PlayerWins
     
-    ; TODO: Compare totals
+    ; Compare totals
+    mov eax, playerTotal
+    cmp eax, dealerTotal
+    jg PlayerWins
+    jl PlayerLoses
+    
+    ; Push (tie)
+    mov edx, OFFSET pushMsg
+    call WriteString
+    ret
+    
+PlayerLoses:
+    ; TODO: Add lose logic
     ret
     
 PlayerWins:
     ; TODO: Add win logic
     ret
 Blackjack ENDPEND main
+
 
 
 
