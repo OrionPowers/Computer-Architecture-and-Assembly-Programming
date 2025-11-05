@@ -54,4 +54,15 @@ GameOver:
     exit
 main ENDP
 
+;---------------------------------------
+DisplayBalance PROC
+;---------------------------------------
+    mov edx, OFFSET balanceMsg
+    call WriteString
+    mov eax, balance
+    call WriteDec
+    call Crlf
+    ret
+DisplayBalance ENDP
+
 END main
