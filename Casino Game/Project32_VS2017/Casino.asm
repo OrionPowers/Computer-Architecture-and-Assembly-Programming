@@ -106,6 +106,17 @@ DisplayBalance PROC
     mov eax, balance
     call WriteDec
     call Crlf
+    
+    ; Deal first card to dealer (shown)
+    mov edx, OFFSET dealerDrawsMsg
+    call WriteString
+    mov eax, 11
+    call RandomRange
+    add eax, 1
+    mov currentCard, eax
+    call WriteDec
+    call Crlf
+    add dealerTotal, eax
     ret
 DisplayBalance ENDP
 
@@ -152,8 +163,20 @@ Blackjack PROC
     mov eax, playerTotal
     call WriteDec
     call Crlf
+    
+    ; Deal first card to dealer (shown)
+    mov edx, OFFSET dealerDrawsMsg
+    call WriteString
+    mov eax, 11
+    call RandomRange
+    add eax, 1
+    mov currentCard, eax
+    call WriteDec
+    call Crlf
+    add dealerTotal, eax
     ret
 Blackjack ENDPEND main
+
 
 
 
