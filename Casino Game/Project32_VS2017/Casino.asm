@@ -117,6 +117,12 @@ DisplayBalance PROC
     call WriteDec
     call Crlf
     add dealerTotal, eax
+    
+    ; Deal second card to dealer (hidden - we just add it)
+    mov eax, 11
+    call RandomRange
+    add eax, 1
+    add dealerTotal, eax
     ret
 DisplayBalance ENDP
 
@@ -174,8 +180,15 @@ Blackjack PROC
     call WriteDec
     call Crlf
     add dealerTotal, eax
+    
+    ; Deal second card to dealer (hidden - we just add it)
+    mov eax, 11
+    call RandomRange
+    add eax, 1
+    add dealerTotal, eax
     ret
 Blackjack ENDPEND main
+
 
 
 
