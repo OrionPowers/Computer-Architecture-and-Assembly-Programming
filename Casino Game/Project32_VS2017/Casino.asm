@@ -48,9 +48,35 @@ GameLoop:
     call WriteString
     call ReadInt
     
-    ; Invalid choice for now
+    ; Check choice
+    cmp eax, 1
+    je PlayBlackjack
+    cmp eax, 2
+    je PlayRoulette
+    cmp eax, 3
+    je PlayCoinFlip
+    cmp eax, 4
+    je PlaySlots
+    
+    ; Invalid choice
     mov edx, OFFSET invalidMsg
     call WriteString
+    jmp GameLoop
+    
+PlayBlackjack:
+    ; TODO: Implement Blackjack
+    jmp GameLoop
+    
+PlayRoulette:
+    ; TODO: Implement Roulette
+    jmp GameLoop
+    
+PlayCoinFlip:
+    ; TODO: Implement Coin Flip
+    jmp GameLoop
+    
+PlaySlots:
+    ; TODO: Implement Slots
     jmp GameLoop
     
 GameOver:
