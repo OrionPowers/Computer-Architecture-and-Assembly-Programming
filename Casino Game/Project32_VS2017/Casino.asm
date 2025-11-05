@@ -134,7 +134,19 @@ Blackjack PROC
     call WriteDec
     call Crlf
     add playerTotal, eax
+    
+    ; Deal second card to player
+    mov edx, OFFSET youDrawMsg
+    call WriteString
+    mov eax, 11
+    call RandomRange
+    add eax, 1
+    mov currentCard, eax
+    call WriteDec
+    call Crlf
+    add playerTotal, eax
     ret
 Blackjack ENDPEND main
+
 
 
