@@ -77,7 +77,7 @@ GameLoop:
     jmp GameLoop
     
 PlayBlackjack:
-    ; TODO: Implement Blackjack
+    call Blackjack
     jmp GameLoop
     
 PlayRoulette:
@@ -109,4 +109,20 @@ DisplayBalance PROC
     ret
 DisplayBalance ENDP
 
-END main
+
+
+;---------------------------------------
+Blackjack PROC
+; Simple blackjack: player and dealer start with 2 cards
+; Player can hit (get another card) or stand
+; Cards are 1-11 in value
+;---------------------------------------
+    mov edx, OFFSET bjTitle
+    call WriteString
+    
+    ; Initialize totals to 0
+    mov playerTotal, 0
+    mov dealerTotal, 0
+    ret
+Blackjack ENDPEND main
+
