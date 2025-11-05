@@ -33,6 +33,24 @@ main PROC
     mov edx, OFFSET welcomeMsg
     call WriteString
     
+GameLoop:
+    ; Check if player is broke
+    cmp balance, 0
+    jle GameOver
+    
+    ; Display menu
+    mov edx, OFFSET menuMsg
+    call WriteString
+    call ReadInt
+    
+    ; Invalid choice for now
+    mov edx, OFFSET invalidMsg
+    call WriteString
+    jmp GameLoop
+    
+GameOver:
+    mov edx, OFFSET gameOverMsg
+    call WriteString
     exit
 main ENDP
 
