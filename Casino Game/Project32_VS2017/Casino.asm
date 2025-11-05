@@ -17,6 +17,13 @@ INCLUDE Irvine32.inc
     reel1 DWORD ?
     reel2 DWORD ?
     reel3 DWORD ?
+    
+    ; Menu strings
+    balanceMsg BYTE "Current Balance: $", 0
+    separator BYTE 0dh, 0ah, "======================", 0dh, 0ah, 0
+    menuMsg BYTE "1-Blackjack | 2-Roulette | 3-Coin Flip | 4-Slots: ", 0
+    invalidMsg BYTE "Invalid choice! Try again.", 0dh, 0ah, 0
+    gameOverMsg BYTE 0dh, 0ah, "Game Over! You're out of money!", 0dh, 0ah, 0
 
 .code
 main PROC
