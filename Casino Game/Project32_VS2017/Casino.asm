@@ -175,6 +175,33 @@ DealerTurn:
     mov eax, dealerTotal
     call WriteDec
     call Crlf
+    
+DealerHit:
+    cmp dealerTotal, 17
+    jge CompareHands
+    
+    ; Dealer hits
+    mov edx, OFFSET dealerDrawsMsg
+    call WriteString
+    mov eax, 11
+    call RandomRange
+    add eax, 1
+    mov currentCard, eax
+    call WriteDec
+    call Crlf
+    add dealerTotal, eax
+    
+    ; Show dealer's new total
+    mov edx, OFFSET dealerTotalMsg
+    call WriteString
+    mov eax, dealerTotal
+    call WriteDec
+    call Crlf
+    
+    jmp DealerHit
+    
+CompareHands:
+    ; TODO: Add win/lose logic
     ret
 DisplayBalance ENDP
 
@@ -290,8 +317,36 @@ DealerTurn:
     mov eax, dealerTotal
     call WriteDec
     call Crlf
+    
+DealerHit:
+    cmp dealerTotal, 17
+    jge CompareHands
+    
+    ; Dealer hits
+    mov edx, OFFSET dealerDrawsMsg
+    call WriteString
+    mov eax, 11
+    call RandomRange
+    add eax, 1
+    mov currentCard, eax
+    call WriteDec
+    call Crlf
+    add dealerTotal, eax
+    
+    ; Show dealer's new total
+    mov edx, OFFSET dealerTotalMsg
+    call WriteString
+    mov eax, dealerTotal
+    call WriteDec
+    call Crlf
+    
+    jmp DealerHit
+    
+CompareHands:
+    ; TODO: Add win/lose logic
     ret
 Blackjack ENDPEND main
+
 
 
 
