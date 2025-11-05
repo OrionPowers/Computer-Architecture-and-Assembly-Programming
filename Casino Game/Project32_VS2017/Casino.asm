@@ -217,7 +217,10 @@ CompareHands:
     ret
     
 PlayerLoses:
-    ; TODO: Add lose logic
+    mov edx, OFFSET loseMsg
+    call WriteString
+    mov eax, wager
+    sub balance, eax
     ret
     
 PlayerWins:
@@ -382,7 +385,10 @@ CompareHands:
     ret
     
 PlayerLoses:
-    ; TODO: Add lose logic
+    mov edx, OFFSET loseMsg
+    call WriteString
+    mov eax, wager
+    sub balance, eax
     ret
     
 PlayerWins:
@@ -392,6 +398,7 @@ PlayerWins:
     add balance, eax
     ret
 Blackjack ENDPEND main
+
 
 
 
