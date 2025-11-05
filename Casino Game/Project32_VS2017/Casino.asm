@@ -148,6 +148,14 @@ PlayerTurn:
     call WriteDec
     call Crlf
     add playerTotal, eax
+    
+    ; Show updated total
+    mov edx, OFFSET yourTotalMsg
+    call WriteString
+    mov eax, playerTotal
+    call WriteDec
+    call Crlf
+    
     jmp PlayerTurn
     
 PlayerBust:
@@ -247,6 +255,14 @@ PlayerTurn:
     call WriteDec
     call Crlf
     add playerTotal, eax
+    
+    ; Show updated total
+    mov edx, OFFSET yourTotalMsg
+    call WriteString
+    mov eax, playerTotal
+    call WriteDec
+    call Crlf
+    
     jmp PlayerTurn
     
 PlayerBust:
@@ -260,6 +276,7 @@ DealerTurn:
     ; TODO: Add dealer logic
     ret
 Blackjack ENDPEND main
+
 
 
 
