@@ -24,6 +24,19 @@ INCLUDE Irvine32.inc
     menuMsg BYTE "1-Blackjack | 2-Roulette | 3-Coin Flip | 4-Slots: ", 0
     invalidMsg BYTE "Invalid choice! Try again.", 0dh, 0ah, 0
     gameOverMsg BYTE 0dh, 0ah, "Game Over! You're out of money!", 0dh, 0ah, 0
+    
+    ; Blackjack strings
+    bjTitle BYTE 0dh, 0ah, "=== BLACKJACK ===", 0dh, 0ah, 0
+    youDrawMsg BYTE "You draw: ", 0
+    dealerDrawsMsg BYTE "Dealer draws: ", 0
+    yourTotalMsg BYTE "Your total: ", 0
+    dealerTotalMsg BYTE "Dealer total: ", 0
+    hitStandMsg BYTE 0dh, 0ah, "Press 1 to Hit, Press 2 to Stand: ", 0
+    bustMsg BYTE 0dh, 0ah, "BUST! You lose ", 0dh, 0ah, 0
+    winMsg BYTE 0dh, 0ah, "You WIN! +", 0dh, 0ah, 0
+    loseMsg BYTE 0dh, 0ah, "You LOSE! -", 0dh, 0ah, 0
+    pushMsg BYTE 0dh, 0ah, "PUSH! No money exchanged", 0dh, 0ah, 0
+    dealerTurnMsg BYTE 0dh, 0ah, "--- Dealer's Turn ---", 0dh, 0ah, 0
 
 .code
 main PROC
