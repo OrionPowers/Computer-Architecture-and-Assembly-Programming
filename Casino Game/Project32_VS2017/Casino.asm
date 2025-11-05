@@ -145,8 +145,16 @@ Blackjack PROC
     call WriteDec
     call Crlf
     add playerTotal, eax
+    
+    ; Show player total
+    mov edx, OFFSET yourTotalMsg
+    call WriteString
+    mov eax, playerTotal
+    call WriteDec
+    call Crlf
     ret
 Blackjack ENDPEND main
+
 
 
 
