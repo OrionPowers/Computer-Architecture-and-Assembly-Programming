@@ -7,6 +7,12 @@ INCLUDE Irvine32.inc
 
 .code
 main PROC
+    call Randomize
+    
+    ; Display welcome message
+    mov edx, OFFSET welcomeMsg
+    call WriteString
+    
     exit
 main ENDP
 
