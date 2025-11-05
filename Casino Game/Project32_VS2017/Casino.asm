@@ -201,7 +201,15 @@ DealerHit:
     jmp DealerHit
     
 CompareHands:
-    ; TODO: Add win/lose logic
+    ; Check dealer bust
+    cmp dealerTotal, 21
+    jg PlayerWins
+    
+    ; TODO: Compare totals
+    ret
+    
+PlayerWins:
+    ; TODO: Add win logic
     ret
 DisplayBalance ENDP
 
@@ -343,9 +351,18 @@ DealerHit:
     jmp DealerHit
     
 CompareHands:
-    ; TODO: Add win/lose logic
+    ; Check dealer bust
+    cmp dealerTotal, 21
+    jg PlayerWins
+    
+    ; TODO: Compare totals
+    ret
+    
+PlayerWins:
+    ; TODO: Add win logic
     ret
 Blackjack ENDPEND main
+
 
 
 
