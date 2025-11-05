@@ -166,7 +166,15 @@ PlayerBust:
     ret
     
 DealerTurn:
-    ; TODO: Add dealer logic
+    mov edx, OFFSET dealerTurnMsg
+    call WriteString
+    
+    ; Reveal dealer's hidden card by showing total
+    mov edx, OFFSET dealerTotalMsg
+    call WriteString
+    mov eax, dealerTotal
+    call WriteDec
+    call Crlf
     ret
 DisplayBalance ENDP
 
@@ -273,9 +281,18 @@ PlayerBust:
     ret
     
 DealerTurn:
-    ; TODO: Add dealer logic
+    mov edx, OFFSET dealerTurnMsg
+    call WriteString
+    
+    ; Reveal dealer's hidden card by showing total
+    mov edx, OFFSET dealerTotalMsg
+    call WriteString
+    mov eax, dealerTotal
+    call WriteDec
+    call Crlf
     ret
 Blackjack ENDPEND main
+
 
 
 
