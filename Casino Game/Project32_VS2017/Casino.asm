@@ -221,7 +221,10 @@ PlayerLoses:
     ret
     
 PlayerWins:
-    ; TODO: Add win logic
+    mov edx, OFFSET winMsg
+    call WriteString
+    mov eax, wager
+    add balance, eax
     ret
 DisplayBalance ENDP
 
@@ -383,9 +386,13 @@ PlayerLoses:
     ret
     
 PlayerWins:
-    ; TODO: Add win logic
+    mov edx, OFFSET winMsg
+    call WriteString
+    mov eax, wager
+    add balance, eax
     ret
 Blackjack ENDPEND main
+
 
 
 
