@@ -123,6 +123,42 @@ DisplayBalance PROC
     call RandomRange
     add eax, 1
     add dealerTotal, eax
+    
+PlayerTurn:
+    ; Check if bust
+    cmp playerTotal, 21
+    jg PlayerBust
+    
+    ; Hit or stand?
+    mov edx, OFFSET hitStandMsg
+    call WriteString
+    call ReadInt
+    mov choice, eax
+    
+    cmp choice, 1
+    jne DealerTurn
+    
+    ; Hit: deal another card
+    mov edx, OFFSET youDrawMsg
+    call WriteString
+    mov eax, 11
+    call RandomRange
+    add eax, 1
+    mov currentCard, eax
+    call WriteDec
+    call Crlf
+    add playerTotal, eax
+    jmp PlayerTurn
+    
+PlayerBust:
+    mov edx, OFFSET bustMsg
+    call WriteString
+    mov eax, wager
+    sub balance, eax
+    ret
+    
+DealerTurn:
+    ; TODO: Add dealer logic
     ret
 DisplayBalance ENDP
 
@@ -186,8 +222,45 @@ Blackjack PROC
     call RandomRange
     add eax, 1
     add dealerTotal, eax
+    
+PlayerTurn:
+    ; Check if bust
+    cmp playerTotal, 21
+    jg PlayerBust
+    
+    ; Hit or stand?
+    mov edx, OFFSET hitStandMsg
+    call WriteString
+    call ReadInt
+    mov choice, eax
+    
+    cmp choice, 1
+    jne DealerTurn
+    
+    ; Hit: deal another card
+    mov edx, OFFSET youDrawMsg
+    call WriteString
+    mov eax, 11
+    call RandomRange
+    add eax, 1
+    mov currentCard, eax
+    call WriteDec
+    call Crlf
+    add playerTotal, eax
+    jmp PlayerTurn
+    
+PlayerBust:
+    mov edx, OFFSET bustMsg
+    call WriteString
+    mov eax, wager
+    sub balance, eax
+    ret
+    
+DealerTurn:
+    ; TODO: Add dealer logic
     ret
 Blackjack ENDPEND main
+
 
 
 
