@@ -123,6 +123,18 @@ Blackjack PROC
     ; Initialize totals to 0
     mov playerTotal, 0
     mov dealerTotal, 0
+    
+    ; Deal first card to player
+    mov edx, OFFSET youDrawMsg
+    call WriteString
+    mov eax, 11
+    call RandomRange
+    add eax, 1
+    mov currentCard, eax
+    call WriteDec
+    call Crlf
+    add playerTotal, eax
     ret
 Blackjack ENDPEND main
+
 
