@@ -589,7 +589,23 @@ ShowHeads:
     call WriteString
     
 CheckWin:
-    ; TODO: Add win/lose logic
+    ; Check if won
+    mov eax, userPick
+    cmp eax, coinResult
+    je CoinWin
+    
+    ; Lost
+    mov edx, OFFSET loseMsg
+    call WriteString
+    mov eax, wager
+    sub balance, eax
+    ret
+    
+CoinWin:
+    mov edx, OFFSET winMsg
+    call WriteString
+    mov eax, wager
+    add balance, eax
     ret
     
 InvalidChoice:
@@ -597,6 +613,7 @@ InvalidChoice:
     call WriteString
     ret
 CoinFlip ENDP
+
 
 
 
