@@ -566,6 +566,30 @@ CoinFlip PROC
     jg InvalidChoice
     
     mov userPick, eax
+    
+    ; Flip the coin
+    mov edx, OFFSET flippingMsg
+    call WriteString
+    
+    mov eax, 2
+    call RandomRange
+    add eax, 1  ; Result is 1 or 2
+    mov coinResult, eax
+    
+    ; Display result
+    cmp coinResult, 1
+    je ShowHeads
+    
+    mov edx, OFFSET tailsMsg
+    call WriteString
+    jmp CheckWin
+    
+ShowHeads:
+    mov edx, OFFSET headsMsg
+    call WriteString
+    
+CheckWin:
+    ; TODO: Add win/lose logic
     ret
     
 InvalidChoice:
@@ -573,6 +597,7 @@ InvalidChoice:
     call WriteString
     ret
 CoinFlip ENDP
+
 
 
 
