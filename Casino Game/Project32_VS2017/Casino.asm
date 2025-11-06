@@ -421,9 +421,21 @@ Roulette PROC
     mov edx, OFFSET betTypeMsg
     call WriteString
     call ReadInt
+    ; Validate bet type (1, 2, or 3)
+    cmp eax, 1
+    jl InvalidPick
+    cmp eax, 3
+    jg InvalidPick
+    
     mov betType, eax
     ret
+    
+InvalidPick:
+    mov edx, OFFSET invalidMsg
+    call WriteString
+    ret
 Roulette ENDPEND main
+
 
 
 
