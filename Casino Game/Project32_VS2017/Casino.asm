@@ -52,7 +52,14 @@ INCLUDE Irvine32.inc
     pickHeadsOrTails BYTE "Press 1 for Heads, Press 2 for Tails: ", 0
     flippingMsg BYTE "Flipping the coin...", 0dh, 0ah, 0
     headsMsg BYTE "Result: HEADS", 0dh, 0ah, 0
-    tailsMsg BYTE "Result: TAILS", 0dh, 0ah, 0dh, 0ah, 0dh, 0ah, "--- Dealer's Turn ---", 0dh, 0ah, 0
+    tailsMsg BYTE "Result: TAILS", 0dh, 0ah, 0
+    
+    ; Slots strings
+    slotsTitle BYTE 0dh, 0ah, "=== SLOT MACHINE ===", 0dh, 0ah, 0
+    spinningMsg BYTE "Spinning the reels...", 0dh, 0ah, 0
+    jackpotMsg BYTE 0dh, 0ah, "JACKPOT!!! All 3 match! +", 0dh, 0ah, 0
+    twoMatchMsg BYTE 0dh, 0ah, "Two match! +", 0dh, 0ah, 0
+    noMatchMsg BYTE 0dh, 0ah, "No match. -", 0dh, 0ah, 0dh, 0ah, 0dh, 0ah, 0dh, 0ah, "--- Dealer's Turn ---", 0dh, 0ah, 0
 
 .code
 main PROC
@@ -613,6 +620,7 @@ InvalidChoice:
     call WriteString
     ret
 CoinFlip ENDP
+
 
 
 
