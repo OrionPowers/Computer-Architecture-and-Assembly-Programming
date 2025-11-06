@@ -475,6 +475,31 @@ DoSpin:
     mov eax, ballNumber
     call WriteDec
     call Crlf
+    
+    ; Check bet type and determine win
+    cmp betType, 1
+    je CheckSpecificNumber
+    ; TODO: Add even/odd checks
+    ret
+    
+CheckSpecificNumber:
+    mov eax, userPick
+    cmp eax, ballNumber
+    je RouletteWin
+    jmp RouletteLose
+    
+RouletteWin:
+    mov edx, OFFSET winMsg
+    call WriteString
+    mov eax, wager
+    add balance, eax
+    ret
+    
+RouletteLose:
+    mov edx, OFFSET loseMsg
+    call WriteString
+    mov eax, wager
+    sub balance, eax
     ret
     
 InvalidPick:
@@ -482,6 +507,7 @@ InvalidPick:
     call WriteString
     ret
 Roulette ENDPEND main
+
 
 
 
