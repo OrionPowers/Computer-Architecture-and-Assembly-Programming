@@ -112,7 +112,7 @@ PlayCoinFlip:
     jmp GameLoop
     
 PlaySlots:
-    ; TODO: Implement Slots
+    call Slots
     jmp GameLoop
     
 GameOver:
@@ -620,6 +620,28 @@ InvalidChoice:
     call WriteString
     ret
 CoinFlip ENDP
+
+;---------------------------------------
+Slots PROC
+; Slot machine: 3 reels spin (1-7)
+; All 3 match = jackpot (+)
+; 2 match = small win (+)
+; Otherwise = lose (-)
+;---------------------------------------
+    mov edx, OFFSET slotsTitle
+    call WriteString
+    
+    mov edx, OFFSET spinningMsg
+    call WriteString
+    
+    ; Spin reel 1
+    mov eax, 7
+    call RandomRange
+    add eax, 1
+    mov reel1, eax
+    ret
+Slots ENDP
+
 
 
 
