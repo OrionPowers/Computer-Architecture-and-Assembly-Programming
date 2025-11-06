@@ -57,9 +57,9 @@ INCLUDE Irvine32.inc
     ; Slots strings
     slotsTitle BYTE 0dh, 0ah, "=== SLOT MACHINE ===", 0dh, 0ah, 0
     spinningMsg BYTE "Spinning the reels...", 0dh, 0ah, 0
-    jackpotMsg BYTE 0dh, 0ah, "JACKPOT!!! All 3 match! +", 0dh, 0ah, 0
-    twoMatchMsg BYTE 0dh, 0ah, "Two match! +", 0dh, 0ah, 0
-    noMatchMsg BYTE 0dh, 0ah, "No match. -", 0dh, 0ah, 0dh, 0ah, 0dh, 0ah, 0dh, 0ah, "--- Dealer's Turn ---", 0dh, 0ah, 0
+    jackpotMsg BYTE 0dh, 0ah, "JACKPOT!!! All 3 match! +$60", 0dh, 0ah, 0
+    twoMatchMsg BYTE 0dh, 0ah, "Two match! +$10", 0dh, 0ah, 0
+    noMatchMsg BYTE 0dh, 0ah, "No match. -$20", 0dh, 0ah, 0
 
 .code
 main PROC
@@ -129,128 +129,6 @@ DisplayBalance PROC
     mov eax, balance
     call WriteDec
     call Crlf
-    
-    ; Deal first card to dealer (shown)
-    mov edx, OFFSET dealerDrawsMsg
-    call WriteString
-    mov eax, 11
-    call RandomRange
-    add eax, 1
-    mov currentCard, eax
-    call WriteDec
-    call Crlf
-    add dealerTotal, eax
-    
-    ; Deal second card to dealer (hidden - we just add it)
-    mov eax, 11
-    call RandomRange
-    add eax, 1
-    add dealerTotal, eax
-    
-PlayerTurn:
-    ; Check if bust
-    cmp playerTotal, 21
-    jg PlayerBust
-    
-    ; Hit or stand?
-    mov edx, OFFSET hitStandMsg
-    call WriteString
-    call ReadInt
-    mov choice, eax
-    
-    cmp choice, 1
-    jne DealerTurn
-    
-    ; Hit: deal another card
-    mov edx, OFFSET youDrawMsg
-    call WriteString
-    mov eax, 11
-    call RandomRange
-    add eax, 1
-    mov currentCard, eax
-    call WriteDec
-    call Crlf
-    add playerTotal, eax
-    
-    ; Show updated total
-    mov edx, OFFSET yourTotalMsg
-    call WriteString
-    mov eax, playerTotal
-    call WriteDec
-    call Crlf
-    
-    jmp PlayerTurn
-    
-PlayerBust:
-    mov edx, OFFSET bustMsg
-    call WriteString
-    mov eax, wager
-    sub balance, eax
-    ret
-    
-DealerTurn:
-    mov edx, OFFSET dealerTurnMsg
-    call WriteString
-    
-    ; Reveal dealer's hidden card by showing total
-    mov edx, OFFSET dealerTotalMsg
-    call WriteString
-    mov eax, dealerTotal
-    call WriteDec
-    call Crlf
-    
-DealerHit:
-    cmp dealerTotal, 17
-    jge CompareHands
-    
-    ; Dealer hits
-    mov edx, OFFSET dealerDrawsMsg
-    call WriteString
-    mov eax, 11
-    call RandomRange
-    add eax, 1
-    mov currentCard, eax
-    call WriteDec
-    call Crlf
-    add dealerTotal, eax
-    
-    ; Show dealer's new total
-    mov edx, OFFSET dealerTotalMsg
-    call WriteString
-    mov eax, dealerTotal
-    call WriteDec
-    call Crlf
-    
-    jmp DealerHit
-    
-CompareHands:
-    ; Check dealer bust
-    cmp dealerTotal, 21
-    jg PlayerWins
-    
-    ; Compare totals
-    mov eax, playerTotal
-    cmp eax, dealerTotal
-    jg PlayerWins
-    jl PlayerLoses
-    
-    ; Push (tie)
-    mov edx, OFFSET pushMsg
-    call WriteString
-    ret
-    
-PlayerLoses:
-    mov edx, OFFSET loseMsg
-    call WriteString
-    mov eax, wager
-    sub balance, eax
-    ret
-    
-PlayerWins:
-    mov edx, OFFSET winMsg
-    call WriteString
-    mov eax, wager
-    add balance, eax
     ret
 DisplayBalance ENDP
 
@@ -729,6 +607,8 @@ TwoMatch:
     add balance, eax
     ret
 Slots ENDP
+
+END main
 
 
 
