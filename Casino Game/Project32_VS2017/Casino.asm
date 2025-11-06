@@ -639,8 +639,97 @@ Slots PROC
     call RandomRange
     add eax, 1
     mov reel1, eax
+    
+    ; Spin reel 2
+    mov eax, 7
+    call RandomRange
+    add eax, 1
+    mov reel2, eax
+    
+    ; Spin reel 3
+    mov eax, 7
+    call RandomRange
+    add eax, 1
+    mov reel3, eax
+    
+    ; Display reels: [ 1 ] [ 2 ] [ 3 ]
+    mov al, '['
+    call WriteChar
+    mov al, ' '
+    call WriteChar
+    mov eax, reel1
+    call WriteDec
+    mov al, ' '
+    call WriteChar
+    mov al, ']'
+    call WriteChar
+    mov al, ' '
+    call WriteChar
+    mov al, '['
+    call WriteChar
+    mov al, ' '
+    call WriteChar
+    mov eax, reel2
+    call WriteDec
+    mov al, ' '
+    call WriteChar
+    mov al, ']'
+    call WriteChar
+    mov al, ' '
+    call WriteChar
+    mov al, '['
+    call WriteChar
+    mov al, ' '
+    call WriteChar
+    mov eax, reel3
+    call WriteDec
+    mov al, ' '
+    call WriteChar
+    mov al, ']'
+    call WriteChar
+    call Crlf
+    
+    ; Check for wins - All 3 match = jackpot
+    mov eax, reel1
+    cmp eax, reel2
+    jne CheckTwoMatch
+    cmp eax, reel3
+    jne CheckTwoMatch
+    
+    ; Jackpot!
+    mov edx, OFFSET jackpotMsg
+    call WriteString
+    mov eax, 60
+    add balance, eax
+    ret
+    
+CheckTwoMatch:
+    ; Check if any 2 match
+    mov eax, reel1
+    cmp eax, reel2
+    je TwoMatch
+    mov eax, reel1
+    cmp eax, reel3
+    je TwoMatch
+    mov eax, reel2
+    cmp eax, reel3
+    je TwoMatch
+    
+    ; No match
+    mov edx, OFFSET noMatchMsg
+    call WriteString
+    mov eax, wager
+    sub balance, eax
+    ret
+    
+TwoMatch:
+    mov edx, OFFSET twoMatchMsg
+    call WriteString
+    mov eax, 10
+    add balance, eax
     ret
 Slots ENDP
+
 
 
 
