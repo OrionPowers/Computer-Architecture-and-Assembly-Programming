@@ -447,7 +447,21 @@ Roulette PROC
     jmp SpinWheel
     
 SpinWheel:
-    ; TODO: Add wheel spinning logic
+    ; Display bet type if even/odd
+    cmp betType, 2
+    jne CheckOddBet
+    mov edx, OFFSET evenBetMsg
+    call WriteString
+    jmp DoSpin
+    
+CheckOddBet:
+    cmp betType, 3
+    jne DoSpin
+    mov edx, OFFSET oddBetMsg
+    call WriteString
+    
+DoSpin:
+    ; TODO: Add actual spinning
     ret
     
 InvalidPick:
@@ -455,6 +469,7 @@ InvalidPick:
     call WriteString
     ret
 Roulette ENDPEND main
+
 
 
 
