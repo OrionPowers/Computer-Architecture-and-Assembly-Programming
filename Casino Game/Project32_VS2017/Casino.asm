@@ -559,9 +559,21 @@ CoinFlip PROC
     mov edx, OFFSET pickHeadsOrTails
     call WriteString
     call ReadInt
+    ; Validate input (1 or 2)
+    cmp eax, 1
+    jl InvalidChoice
+    cmp eax, 2
+    jg InvalidChoice
+    
     mov userPick, eax
     ret
-CoinFlip ENDPEND main
+    
+InvalidChoice:
+    mov edx, OFFSET invalidMsg
+    call WriteString
+    ret
+CoinFlip ENDP
+
 
 
 
