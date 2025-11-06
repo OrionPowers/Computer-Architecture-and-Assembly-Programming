@@ -37,6 +37,15 @@ INCLUDE Irvine32.inc
     loseMsg BYTE 0dh, 0ah, "You LOSE! -", 0dh, 0ah, 0
     pushMsg BYTE 0dh, 0ah, "PUSH! No money exchanged", 0dh, 0ah, 0
     dealerTurnMsg BYTE 0dh, 0ah, "--- Dealer's Turn ---", 0dh, 0ah, 0
+    
+    ; Roulette strings
+    rouletteTitle BYTE 0dh, 0ah, "=== ROULETTE ===", 0dh, 0ah, 0
+    betTypeMsg BYTE "Press 1 for Specific Number, Press 2 for Even, Press 3 for Odd: ", 0
+    pickNumberMsg BYTE "Pick a number (0-36): ", 0
+    spinMsg BYTE "Spinning the wheel...", 0dh, 0ah, 0
+    ballLandedMsg BYTE "Ball landed on: ", 0
+    evenBetMsg BYTE "You bet on EVEN numbers", 0dh, 0ah, 0
+    oddBetMsg BYTE "You bet on ODD numbers", 0dh, 0ah, 0dh, 0ah, "--- Dealer's Turn ---", 0dh, 0ah, 0
 
 .code
 main PROC
@@ -398,6 +407,7 @@ PlayerWins:
     add balance, eax
     ret
 Blackjack ENDPEND main
+
 
 
 
