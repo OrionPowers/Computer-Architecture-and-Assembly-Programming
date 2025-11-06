@@ -45,7 +45,14 @@ INCLUDE Irvine32.inc
     spinMsg BYTE "Spinning the wheel...", 0dh, 0ah, 0
     ballLandedMsg BYTE "Ball landed on: ", 0
     evenBetMsg BYTE "You bet on EVEN numbers", 0dh, 0ah, 0
-    oddBetMsg BYTE "You bet on ODD numbers", 0dh, 0ah, 0dh, 0ah, "--- Dealer's Turn ---", 0dh, 0ah, 0
+    oddBetMsg BYTE "You bet on ODD numbers", 0dh, 0ah, 0
+    
+    ; Coin Flip strings
+    coinFlipTitle BYTE 0dh, 0ah, "=== COIN FLIP ===", 0dh, 0ah, 0
+    pickHeadsOrTails BYTE "Press 1 for Heads, Press 2 for Tails: ", 0
+    flippingMsg BYTE "Flipping the coin...", 0dh, 0ah, 0
+    headsMsg BYTE "Result: HEADS", 0dh, 0ah, 0
+    tailsMsg BYTE "Result: TAILS", 0dh, 0ah, 0dh, 0ah, 0dh, 0ah, "--- Dealer's Turn ---", 0dh, 0ah, 0
 
 .code
 main PROC
@@ -538,6 +545,7 @@ InvalidPick:
     call WriteString
     ret
 Roulette ENDPEND main
+
 
 
 
