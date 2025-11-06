@@ -101,7 +101,7 @@ PlayRoulette:
     jmp GameLoop
     
 PlayCoinFlip:
-    ; TODO: Implement Coin Flip
+    call CoinFlip
     jmp GameLoop
     
 PlaySlots:
@@ -544,7 +544,25 @@ InvalidPick:
     mov edx, OFFSET invalidMsg
     call WriteString
     ret
-Roulette ENDPEND main
+Roulette ENDP
+
+;---------------------------------------
+CoinFlip PROC
+; Simple coin flip: pick heads (1) or tails (2)
+; Coin flips randomly
+; Match = win
+;---------------------------------------
+    mov edx, OFFSET coinFlipTitle
+    call WriteString
+    
+    ; Get user's choice
+    mov edx, OFFSET pickHeadsOrTails
+    call WriteString
+    call ReadInt
+    mov userPick, eax
+    ret
+CoinFlip ENDPEND main
+
 
 
 
