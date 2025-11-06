@@ -479,8 +479,39 @@ DoSpin:
     ; Check bet type and determine win
     cmp betType, 1
     je CheckSpecificNumber
-    ; TODO: Add even/odd checks
+    cmp betType, 2
+    je CheckEven
+    cmp betType, 3
+    je CheckOdd
     ret
+    
+CheckEven:
+    ; Check if ball is 0 (loses on 0)
+    cmp ballNumber, 0
+    je RouletteLose
+    
+    ; Check if even (divide by 2, check remainder)
+    mov eax, ballNumber
+    mov edx, 0
+    mov ecx, 2
+    div ecx
+    cmp edx, 0
+    je RouletteWin
+    jmp RouletteLose
+    
+CheckOdd:
+    ; Check if ball is 0 (loses on 0)
+    cmp ballNumber, 0
+    je RouletteLose
+    
+    ; Check if odd (divide by 2, check remainder)
+    mov eax, ballNumber
+    mov edx, 0
+    mov ecx, 2
+    div ecx
+    cmp edx, 1
+    je RouletteWin
+    jmp RouletteLose
     
 CheckSpecificNumber:
     mov eax, userPick
@@ -507,6 +538,7 @@ InvalidPick:
     call WriteString
     ret
 Roulette ENDPEND main
+
 
 
 
