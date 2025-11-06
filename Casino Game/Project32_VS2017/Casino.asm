@@ -461,7 +461,20 @@ CheckOddBet:
     call WriteString
     
 DoSpin:
-    ; TODO: Add actual spinning
+    ; Spin the wheel
+    mov edx, OFFSET spinMsg
+    call WriteString
+    
+    mov eax, 37
+    call RandomRange
+    mov ballNumber, eax
+    
+    ; Display result
+    mov edx, OFFSET ballLandedMsg
+    call WriteString
+    mov eax, ballNumber
+    call WriteDec
+    call Crlf
     ret
     
 InvalidPick:
@@ -469,6 +482,7 @@ InvalidPick:
     call WriteString
     ret
 Roulette ENDPEND main
+
 
 
 
