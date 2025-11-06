@@ -428,6 +428,26 @@ Roulette PROC
     jg InvalidPick
     
     mov betType, eax
+    
+    ; If specific number, get the number
+    cmp betType, 1
+    jne SpinWheel
+    
+    mov edx, OFFSET pickNumberMsg
+    call WriteString
+    call ReadInt
+    
+    ; Validate input (0-36)
+    cmp eax, 0
+    jl InvalidPick
+    cmp eax, 36
+    jg InvalidPick
+    
+    mov userPick, eax
+    jmp SpinWheel
+    
+SpinWheel:
+    ; TODO: Add wheel spinning logic
     ret
     
 InvalidPick:
@@ -435,6 +455,7 @@ InvalidPick:
     call WriteString
     ret
 Roulette ENDPEND main
+
 
 
 
