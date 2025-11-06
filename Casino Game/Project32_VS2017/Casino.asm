@@ -90,7 +90,7 @@ PlayBlackjack:
     jmp GameLoop
     
 PlayRoulette:
-    ; TODO: Implement Roulette
+    call Roulette
     jmp GameLoop
     
 PlayCoinFlip:
@@ -406,7 +406,25 @@ PlayerWins:
     mov eax, wager
     add balance, eax
     ret
-Blackjack ENDPEND main
+Blackjack ENDP
+
+;---------------------------------------
+Roulette PROC
+; Roulette: pick specific number (0-36), even, or odd
+; Ball lands on random 0-36
+; Specific number match = win, even/odd match = win
+;---------------------------------------
+    mov edx, OFFSET rouletteTitle
+    call WriteString
+    
+    ; Get bet type
+    mov edx, OFFSET betTypeMsg
+    call WriteString
+    call ReadInt
+    mov betType, eax
+    ret
+Roulette ENDPEND main
+
 
 
 
